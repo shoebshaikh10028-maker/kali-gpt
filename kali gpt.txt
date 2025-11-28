@@ -1,0 +1,284 @@
+DOCT<!YPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kali GPT - AI Terminal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="sidebar">
+    <h2>Kali GPT</h2>
+    <ul>
+      <li class="active">Terminal Mode</li>
+      <li>AI Mode</li>
+      <li>Settings</li>
+      <li>About</li>
+    </ul>
+  </div>
+
+  <div class="chat-area">
+    <div id="messages" class="messages"></div>
+
+    <div class="input-box">
+      <input type="text" id="userInput" placeholder="Write a command…">
+      <button id="sendBtn">▶</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Consolas", monospace;
+}
+
+body{
+  background:#0a0f15;
+  color:#d9e3ee;
+}
+
+.container{
+  display:flex;
+  height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+  width:230px;
+  background:#0d1520;
+  border-right:1px solid #1e293b;
+  padding:20px;
+}
+
+.sidebar h2{
+  margin-bottom:20px;
+  color:#38bdf8;
+}
+
+.sidebar ul{
+  list-style:none;
+}
+
+.sidebar li{
+  padding:12px 10px;
+  margin-bottom:8px;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.sidebar li:hover{
+  background:#1e293b;
+}
+
+.sidebar .active{
+  background:#1e293b;
+  border-left:3px solid #38bdf8;
+}
+
+/* Chat Area */
+.chat-area{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.messages{
+  flex:1;
+  padding:20px;
+  overflow-y:auto;
+}
+
+.message{
+  margin-bottom:18px;
+  padding:12px 14px;
+  border-radius:8px;
+  max-width:80%;
+  line-height:1.4rem;
+}
+
+.user{
+  background:#1e293b;
+  margin-left:auto;
+}
+
+.bot{
+  background:#0f172a;
+  border-left:3px solid #38bdf8;
+}
+
+/* Input Box */
+.input-box{
+  display:flex;
+  padding:12px;
+  background:#0d1520;
+  border-top:1px solid #1e293b;
+}
+
+.input-box input{
+  flex:1;
+  background:#0f172a;
+  border:none;
+  outline:none;
+  padding:12px;
+  font-size:16px;
+  color:#d9e3ee;
+  border-radius:6px;
+}
+
+.input-box button{
+  margin-left:10px;
+  padding:10px 18px;
+  font-size:16px;
+  cursor:pointer;
+  background:#38bdf8;
+  color:#000;
+  border:none;
+  border-radius:6px;
+}
+
+@media (max-width:768px){
+  .sidebar{
+    display:none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const messagesEl = document.getElementById("messages");
+const inputEl = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+
+function addMessage(text, sender){
+  const div = document.createElement("div");
+  div.classList.add("message", sender);
+  div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+async function botReply(userMsg){
+
+  // -------------------------
+  // 🌐 YOUR REAL AI BACKEND HERE
+  // Replace this part with your OpenAI / Local API / Node backend
+  // -------------------------
+  
+  // Demo AI response (Kali GPT style)
+  const reply = `Processing command: ${userMsg}\n\n✔ Command executed successfully.\n✔ Kali GPT Ready.`;
+
+  return reply;
+}
+
+sendBtn.addEventListener("click", async () => {
+  const text = inputEl.value.trim();
+  if(!text) return;
+
+  addMessage(text, "user");
+  inputEl.value = "";
+
+  const ai = await botReply(text);  
+  addMessage(ai, "bot");
+});
+
+inputEl.addEventListener("keypress", (e)=>{
+  if(e.key === "Enter") sendBtn.click();
+});
+
+
+
+
+
+
+
+
